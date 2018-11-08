@@ -10,6 +10,45 @@ namespace CharlieBankApp.Data
     {
         public List<Customer> CustomerList { get; set; }
 
+        public string BankWithdraw(int accountNumber, decimal amount)
+        {
+            Account account;
+            foreach (var item in this.CustomerList)
+            {
+                var acc = item.CustomerAccounts.Where(x => x.AccountNumber == accountNumber);
+                if (acc.Count() > 0)
+                {
+                    account = acc.FirstOrDefault();
+                    if (account.Balance > amount)
+                    {
+                        account.Balance -= amount;
+                        return "Lyckades med uttaget, nya saldot är: " + account.Balance + "Kr";
+                    }
+                    return "Täckning saknas";
+                }
+            }
+
+            return "Kontot hittades inte";      
+        }
+
+        public string BankDeposit(int accountNumber, decimal amount)
+        {
+            var account = new Account();
+            foreach (var item in this.CustomerList)
+            {
+                var acc = item.CustomerAccounts.Where(x => x.AccountNumber == accountNumber);
+                if (acc.Count() > 0)
+                {
+                    account = acc.FirstOrDefault();
+
+                    account.Balance += amount;
+                    return "Lyckades med insättningen, nya saldot är: " + account.Balance + "Kr";
+                }
+            }
+
+            return "Kontot hittades inte";       
+        }
+
         public BankRepostitory()
         {
             var listOfCustomers = new List<Customer>();

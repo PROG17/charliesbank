@@ -1,0 +1,44 @@
+﻿@model CharlieBankApp.Models.BankActionIndexViewModel
+
+@{
+    ViewData["Title"] = "Uttag och insättningar";
+}
+
+<h2>Uttag och insättningar</h2>
+
+<h4>Fyll i kontonummret och summan.</h4>
+<hr />
+@if(Model != null)
+{
+    <h3 style="color:blueviolet">@Model.Message</h3>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DepositOrWithdraw">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="AccountNumber" class="control-label"></label>
+                <input asp-for="AccountNumber" class="form-control" />
+                <span asp-validation-for="AccountNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Uttag" name="btn" class="btn btn-default" />
+                <input type="submit" value="Insättning" name="btn" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Tillbaka</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
