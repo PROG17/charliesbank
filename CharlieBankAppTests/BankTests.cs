@@ -11,17 +11,17 @@ namespace CharlieBankAppTests
         [Fact]
         public void TryWithdraw()
         {
-            var customerToTest = BankRepo.CustomerList[0];
+            var customerToTest = BankRepostitory.CustomerList[0];
  
             BankRepo.BankWithdraw(customerToTest.CustomerAccounts[0].AccountNumber, 100);
 
-            Assert.Equal(900, customerToTest.CustomerAccounts[0].Balance);
+            Assert.Equal(1000, customerToTest.CustomerAccounts[0].Balance);
         }
 
         [Fact]
         public void TryDeposit()
         {
-            var customerToTest = BankRepo.CustomerList[0];
+            var customerToTest = BankRepostitory.CustomerList[0];
 
             BankRepo.BankDeposit(customerToTest.CustomerAccounts[0].AccountNumber, 100);
 
@@ -31,7 +31,7 @@ namespace CharlieBankAppTests
         [Fact]
         public void TryOverWithdrawMessage()
         {
-            var customerToTest = BankRepo.CustomerList[0];
+            var customerToTest = BankRepostitory.CustomerList[0];
 
             var result = BankRepo.BankWithdraw(customerToTest.CustomerAccounts[0].AccountNumber, 1100);
 
@@ -41,7 +41,7 @@ namespace CharlieBankAppTests
         [Fact]
         public void TryOverWithdraw()
         {
-            var customerToTest = BankRepo.CustomerList[0];
+            var customerToTest = BankRepostitory.CustomerList[0];
 
             var result = BankRepo.BankWithdraw(customerToTest.CustomerAccounts[0].AccountNumber, 1100);
 

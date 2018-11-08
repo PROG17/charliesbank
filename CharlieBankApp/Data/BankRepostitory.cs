@@ -8,12 +8,12 @@ namespace CharlieBankApp.Data
 {
     public class BankRepostitory
     {
-        public List<Customer> CustomerList { get; set; }
+        public static List<Customer> CustomerList { get; set; }
 
         public string BankWithdraw(int accountNumber, decimal amount)
         {
             Account account;
-            foreach (var item in this.CustomerList)
+            foreach (var item in CustomerList)
             {
                 var acc = item.CustomerAccounts.Where(x => x.AccountNumber == accountNumber);
                 if (acc.Count() > 0)
@@ -21,7 +21,10 @@ namespace CharlieBankApp.Data
                     account = acc.FirstOrDefault();
                     if (account.Balance > amount)
                     {
+                        var index = CustomerList.IndexOf(item);
+                        var index2 = CustomerList[index].CustomerAccounts.IndexOf(acc.FirstOrDefault());              
                         account.Balance -= amount;
+                        CustomerList[index].CustomerAccounts[index2] = account;
                         return "Lyckades med uttaget, nya saldot är: " + account.Balance + "Kr";
                     }
                     return "Täckning saknas";
@@ -34,14 +37,16 @@ namespace CharlieBankApp.Data
         public string BankDeposit(int accountNumber, decimal amount)
         {
             var account = new Account();
-            foreach (var item in this.CustomerList)
+            foreach (var item in CustomerList)
             {
                 var acc = item.CustomerAccounts.Where(x => x.AccountNumber == accountNumber);
                 if (acc.Count() > 0)
                 {
                     account = acc.FirstOrDefault();
-
+                    var index = CustomerList.IndexOf(item);
+                    var index2 = CustomerList[index].CustomerAccounts.IndexOf(acc.FirstOrDefault());
                     account.Balance += amount;
+                    CustomerList[index].CustomerAccounts[index2] = account;
                     return "Lyckades med insättningen, nya saldot är: " + account.Balance + "Kr";
                 }
             }
@@ -51,6 +56,10 @@ namespace CharlieBankApp.Data
 
         public BankRepostitory()
         {
+            if(CustomerList != null)
+            {
+                return;
+            }
             var listOfCustomers = new List<Customer>();
             var listOfRandomNames = new List<string>() { "Henrik dahl", "Kapten Mygel", "Henrietta Bruno" };
             for (int i = 0; i < 3; i++)
@@ -62,7 +71,7 @@ namespace CharlieBankApp.Data
             }
             var acc = new Account() { AccountNumber = 100, Balance = 2222 };
             listOfCustomers[1].CustomerAccounts.Add(acc);
-            this.CustomerList = listOfCustomers;
+            CustomerList = listOfCustomers;
         }
     }
 }
