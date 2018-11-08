@@ -19,7 +19,7 @@ namespace CharlieBankApp.Controllers
 
         public IActionResult Index()
         {
-            var vm = new IndexViewModel() { Customers = BankRepo.CustomerList };
+            var vm = new IndexViewModel() { Customers = BankRepostitory.CustomerList };
             return View(vm);
         }
 
