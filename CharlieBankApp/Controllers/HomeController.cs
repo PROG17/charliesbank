@@ -5,14 +5,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CharlieBankApp.Models;
+using CharlieBankApp.Data;
 
 namespace CharlieBankApp.Controllers
 {
     public class HomeController : Controller
     {
+        private BankRepostitory BankRepo;
+        public HomeController(BankRepostitory _BankRepo)
+        {
+            BankRepo = _BankRepo;
+        }
+
         public IActionResult Index()
         {
-            return View();
+            var vm = new IndexViewModel() { Customers = BankRepostitory.CustomerList };
+            return View(vm);
         }
 
         public IActionResult About()

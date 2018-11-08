@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharlieBankApp", "CharlieBankApp\CharlieBankApp.csproj", "{7EA175C1-5BA8-4813-82FD-285D9FC3990F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharlieBankApp", "CharlieBankApp\CharlieBankApp.csproj", "{7EA175C1-5BA8-4813-82FD-285D9FC3990F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CharlieBankAppTests", "CharlieBankAppTests\CharlieBankAppTests.csproj", "{35750142-C2A1-45D0-80F1-1AC0A0BA5DCD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CharlieBankAppTests", "CharlieBankAppTests\CharlieBankAppTests.csproj", "{35750142-C2A1-45D0-80F1-1AC0A0BA5DCD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FB9CDE5F-E2C2-4D25-B79C-50F2EE01D76A}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
