@@ -86,7 +86,7 @@ namespace CharlieBankAppTests
 
             Assert.Equal(initialBalance1, BankRepostitory.CustomerList[1].CustomerAccounts[0].Balance);
             Assert.Equal(initialBalance, BankRepostitory.CustomerList[0].CustomerAccounts[0].Balance);
-            Assert.Equal("Transfer failed", result);
+            Assert.Equal("Överföring misslyckades", result);
         }
     }
 }
