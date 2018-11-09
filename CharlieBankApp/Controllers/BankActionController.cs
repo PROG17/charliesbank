@@ -26,7 +26,7 @@ namespace CharlieBankApp.Controllers
         public IActionResult DepositOrWithdraw(string btn, BankActionIndexViewModel vm)
         {
             string result;
-            if(btn.Length > 5)
+            if (btn.Length > 5)
             {
 
                 result = BankRepo.BankDeposit(vm.AccountNumber, vm.Amount);
@@ -41,6 +41,36 @@ namespace CharlieBankApp.Controllers
                 Message = result
             };
             return View("Index", newVm);
+        }
+
+        public IActionResult Transfer()
+        {
+            TransferViewModel vm = new TransferViewModel();
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult Transfer(TransferViewModel vm)
+        {
+            
+            if (!ModelState.IsValid)
+            {
+                vm.Message = "Överföring misslyckades! Se över kontouppgifterna igen";
+                return View(vm);
+            };
+            
+            if (BankRepostitory.GetAccountFromAccountNumber(vm.FromAccountId) == null)
+            {
+                vm.Message = "Överföring misslyckades! Se över kontouppgifterna igen";
+            }
+            else
+            {
+                vm.Message = BankRepostitory.GetAccountFromAccountNumber(vm.FromAccountId).Transfer(vm.ToAccountId, (int)vm.Amount);
+
+            }
+
+            return View(vm);
         }
     }
 }

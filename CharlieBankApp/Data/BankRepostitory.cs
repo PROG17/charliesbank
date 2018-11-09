@@ -10,6 +10,18 @@ namespace CharlieBankApp.Data
     {
         public static List<Customer> CustomerList { get; set; }
 
+        public static Account GetAccountFromAccountNumber(int AccountNumber)
+        {
+            foreach (var item in CustomerList)
+            {
+                var acc = item.CustomerAccounts.Where(x => x.AccountNumber == AccountNumber).FirstOrDefault();
+                if (acc != null)
+                {
+                    return acc;
+                }
+            }
+            return null;
+        }
         public string BankWithdraw(int accountNumber, decimal amount)
         {
             Account account;
